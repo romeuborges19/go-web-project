@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <link rel="stylesheet" href="web/static/css/style.css">
+  </head>
+  <body>
+    <main>
+      <div class="header-container">
+        <div class="header-title-container">
+            <h1 class="header-title">Página inicial</h1>
+          </div>
+          {{ if .Logged }}
+            <div class="header-user-info-container">
+              <p class="header-username">{{ .User.Username}}</p>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+        <div class="buttons">
+          <div class="button">
+            <a href="/author/register">Página de cadastro</a> <br>
+          </div>
+          <div class="button">
+            <a href="/author/ask">Página de pergunta</a>
+          </div>
+          <div class="button">
+            <a href="/author/">Página de login</a><br>
+          </div>
+        </div>
+
+        <div class="questions-container">
+          {{ range $i, $q := .Questions }}
+          <div class="question-container">
+            <div class="question-title-container">
+              <a class="question-title" href="/question/{{ $q.ID }}">{{ $q.Title }}</a>
+            </div>
+            <div class="question-description">
+              <p>{{ $q.Description }}</p> 
+            </div>
+          </div>
+          {{ end }}
+        </div>
+    </main>
+	<script src="index.js"></script>
+  </body>
+</html>
+
