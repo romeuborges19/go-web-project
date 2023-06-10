@@ -3,13 +3,22 @@
 	margin: 0;
 }
 
+a{
+	font-family: Arial, Helvetica, sans-serif;
+}
+
 .header-container{
 	display: flex;
 	flex-direction: row;
-	justify-content:space-around;
+	justify-content:space-between;
 	align-items: center;
 	padding-block: 10px;
+	padding-inline: 10%;
 	background-color: #03181c;
+}
+
+.header-content-container{
+	margin-inline: 10%;
 }
 
 .header-username{
@@ -18,6 +27,54 @@
 
 .header-title {
 	color: white;
+}
+
+.header-buttons-container{
+	display: flex;
+	gap: 10px;
+}
+
+.header-button-container{
+	border-radius: 3px;
+	padding: 10px 10px;
+}
+
+.header-register-button-container{
+	background-color:#f2f2f2;
+	transition: 100ms;
+}
+.header-register-button-container:hover{
+	background-color:#c7c9c8;
+}
+
+.header-login-button-container{
+	background-color: #15cf49;
+	transition: 100ms;
+}
+.header-login-button-container a{
+	color: white;
+	font-weight: bold;
+}
+.header-login-button-container:hover{
+	background-color:#0e8730;
+}
+.header-button {
+	font-size: 14px;
+	text-decoration: none;
+	color: black;
+}
+
+.body-header-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-block: 20px 10px;
+	margin-inline: 10%;
+}
+
+.body-header-title{
+	font-size: 30px;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .buttons {
@@ -50,6 +107,11 @@
 	padding-block: 5px;
 	width: 100%;
 	max-width: 80%;
+	transition: 200ms;
+}
+
+.question-container:hover{
+	transform: scale(1.005);
 }
 
 .question-title{
@@ -61,5 +123,79 @@
 
 .question-title:hover{
 	color: blue;
+}
+
+.button {
+	border-radius: 3px;
+	padding: 10px 10px;
+	background-color: #15cf49;
+	transition: 100ms;
+}
+
+.button:hover{
+	background-color: #0e8730;
+}
+
+.button a{
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+}
+
+.form-body-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: 100%;
+	margin-top: 50px;
+}
+
+.form-box-container{
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #dcdfe0;
+	border-radius: 3px;
+	padding: 10px;
+	gap: 15px;
+}
+
+.form-title{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.form-input-container {
+	display: flex;
+	flex-direction: column;
+	padding-block: 5px;
+}
+
+.form-text-input{
+	width: 500px;
+	height: 30px;
+	margin-top: 5px;
+	border: 1px solid #dcdfe0;
+	border-radius: 3px;
+	padding-inline: 4px;
+}
+
+.form-submit-button{
+	border: none;
+	border-radius: 3px;
+	width: 510px;
+	height: 34px;
+	background-color: #03181c;
+	color: white;
+	font-weight: bold;
+	font-size: 14px;
+}
+.form-submit-button:hover{
+	background-color: #234e57;
+}
+
+.form-form-container{
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
 }
 

@@ -29,9 +29,16 @@ func (c *Controller) Handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	username := fmt.Sprint(session.Values["username"])
-	userInfo, err := c.userService.GetUserByUsername(username, c.db)
-
+	var username string
+	var userInfo domain.Person
+	if logged {
+		username = fmt.Sprint(session.Values["username"])
+		userInfo, err = c.userService.GetUserByUsername(username, c.db)
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
+	}
 
 	tmpl.ExecuteTemplate(w, "index.html", struct {
 		Logged bool

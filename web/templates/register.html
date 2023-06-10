@@ -1,34 +1,33 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Meu site</title>
-    <link rel="stylesheet" href="web/static/css/style.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-  </head>
-  <body>
+{{ template "headHTML" }}
     <main>
-        <h1>Criar usuário</h1>  
-        <div class="register-container">
-          <form action="/author/register-process" method="POST">
-            <div class="register-username-container">
-              <label for="usr">Username:</label> 
-              <input type="text" name="username" id="usr">
+      {{ template "headerHTML" }}
+        <div class="form-body-container">
+          <div class="form-box-container">
+            <div class="form-title-container">
+              <p class="form-title">Register</p>
             </div>
-            <div class="register-email-container">
-              <label for="eml">Email:</label>
-              <input type="text" name="email" id="eml">
-            </div>
-            <div class="register-password-container">
-              <label for="pwd">Password:</label>
-              <input type="password" name="password" id="pwd">
-            </div>
-            <div class="register-submit-container">
-              <input type="submit">
-            </div>
-          </form>
+            <form action="/author/register-process" method="POST">
+              <div class="form-form-container">
+                <div class="form-inputs-container">
+                  <div class="form-input-container">
+                    <label for="usr">Username:</label> 
+                    <input class="form-text-input" type="text" name="username" id="usr">
+                  </div>
+                  <div class="form-input-container">
+                    <label for="eml">Email:</label>
+                    <input class="form-text-input" type="text" name="email" id="eml">
+                  </div>
+                  <div class="form-input-container">
+                    <label for="pwd">Password:</label>
+                    <input class="form-text-input" type="password" name="password" id="pwd">
+                  </div>
+                </div>
+                <div class="form-submit-button-container">
+                  <input class="form-submit-button" type="submit">
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
     </main>
 	<script src="index.js"></script>

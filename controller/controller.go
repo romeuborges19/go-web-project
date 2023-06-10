@@ -45,6 +45,10 @@ func (c *Controller) Login(w http.ResponseWriter, r *http.Request){
 	tmpl.ExecuteTemplate(w, "login.html", nil)
 }
 
+func (c *Controller) TemplateTest(w http.ResponseWriter, r *http.Request){
+	tmpl.ExecuteTemplate(w, "processor.html", nil)
+}
+
 func (c *Controller) DeleteSession(w http.ResponseWriter, r *http.Request) {
 	session, err := store.Get(r, "session-name")
 	if err != nil {

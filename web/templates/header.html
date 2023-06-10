@@ -1,0 +1,22 @@
+{{ define "headerHTML" }}
+
+<div class="header-container">
+    <div class="header-title-container">
+        <h1 class="header-title">Página inicial</h1>
+    </div>
+    {{ if .Logged }}
+        <div class="header-user-info-container">
+            <p class="header-username">{{ .User.Username }}</p>
+        </div>
+    {{ else }}
+        <div class="header-buttons-container">
+            <div class="header-button-container header-register-button-container">
+            	<a class="header-button" href="/author/register">Register</a> <br>
+            </div>
+            <div class="header-button-container header-login-button-container">
+                <a class="header-button" href="/author/">Log in</a><br>
+            </div>
+        </div>
+    {{ end }}
+</div>
+{{ end }}

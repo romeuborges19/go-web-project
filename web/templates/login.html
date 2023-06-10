@@ -1,22 +1,30 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Meu site</title>
-    <link rel="stylesheet" href="web/static/css/style.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-  </head>
-  <body>
+{{ template "headHTML" }}
     <main>
-		<h1>Login:</h1>
-		<form action="/author/login" method="POST">
-			Username: <input type="text" name="username"> <br>
-			Password: <input type="password" name="password"> <br>
-			<input type="submit" value="login">
-		</form>
-    </main>
-	<script src="index.js"></script>
+      {{ template "headerHTML" }}
+        <div class="form-body-container">
+          <div class="form-box-container">
+            <div class="form-title-container">
+              <p class="form-title">Log in</p>
+            </div>
+              <form action="/author/login" method="POST">
+                <div class="form-form-container">
+                  <div class="form-inputs-container">
+                    <div class="form-input-container">
+                      <label>Username:</label>
+                      <input class="form-text-input" type="text" name="username" placeholder="Insert your username...">
+                    </div>
+                    <div class="form-input-container">
+                      <label>Password:</label>
+                      <input class="form-text-input" type="password" name="password" placeholder="Insert your password...">
+                    </div>
+                  </div>
+                  <div class="form-submit-button-container">
+                    <input class="form-submit-button" type="submit" value="Log in">
+                  </div>
+                </div>
+              </form>
+          </div>
+        </div>
+	</main>
   </body>
 </html>
