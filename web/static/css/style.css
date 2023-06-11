@@ -27,6 +27,8 @@ a{
 
 .header-title {
 	color: white;
+	text-decoration: none;
+	font-size: 32px;
 }
 
 .header-buttons-container{
@@ -198,4 +200,10 @@ a{
 	flex-direction: column;
 	gap: 15px;
 }
-
+.form-description-input{
+	width: 500px;
+	margin-top: 5px;
+	border: 1px solid #dcdfe0;
+	border-radius: 3px;
+	padding-inline: 4px;
+}

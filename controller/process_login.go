@@ -37,10 +37,10 @@ func (c *Controller) LoginProcess(w http.ResponseWriter, r *http.Request){
 	if username != "" {
 		session.Values["username"] = username
 	}
-	fmt.Printf("session:", session)
+	fmt.Println("session:", session)
 	err = sessions.Save(r, w)
 
 	if password == correctPassword {
-		http.Redirect(w, r, "/success", http.StatusSeeOther)	
+		http.Redirect(w, r, "/", http.StatusSeeOther)	
 	}
 }

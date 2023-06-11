@@ -1,21 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Website</title>
-    <link rel="stylesheet" href="web/static/css/style.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-  </head>
-  <body>
+{{ template "headHTML" }}
     <main>
-		<h1> Create Question </h1>
-		<form action="/author/question" method="POST">
-			Titulo:<input type="text" name="title"> <br>
-            Descrição:<input type="text" name="description"> <br>
-            <input type="submit" value="perguntar">
-		</form>
+      {{ template "headerHTML" }}
+        <div class="form-body-container">
+          <div class="form-box-container">
+            <div class="form-title-container">
+              <p class="form-title">Ask a Question</p>
+            </div>
+            <form action="/author/question" method="POST">
+              <div class="form-form-container">
+                <div class="form-inputs-container">
+                  <div class="form-input-container">
+                    <label>Title:</label>
+                    <input class="form-text-input" type="text" name="title"> <br>
+                  </div>
+                  <div class="form-input-container">
+                    <label>Description:</label>
+                    <textarea class="form-description-input" type="text" name="description" rows="7"></textarea>
+                  </div>
+                </div>
+                <div class="form-submit-button-container">
+                  <input class="form-submit-button" type="submit" value="Post Question">
+                </div>
+              </div>
+            </form>
+        </div>
+        </div>
     </main>
 	<script src="index.js"></script>
   </body>

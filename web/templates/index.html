@@ -1,14 +1,18 @@
 {{template "headHTML"}}
   <body>
     <main>
-      {{ template "headerHTML" }}
+      {{ template "headerHTML" .}}
         <div class="body-header-container">
           <div class="body-header-title-container">
             <p class="body-header-title">Recent Questions</p>
           </div>
-          {{ if not .Logged }}
+          {{ if .Logged }}
             <div class="button">
               <a href="/author/ask">Ask Question</a>
+            </div>
+          {{ else }}
+            <div class="button">
+              <a href="/author/">Ask Question</a>
             </div>
           {{ end }}
         </div>

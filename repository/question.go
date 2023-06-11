@@ -4,7 +4,6 @@ import (
 	"cserver/domain"
 	"database/sql"
 	"errors"
-	"fmt"
 	"log"
 )
 
@@ -29,13 +28,10 @@ func (q *questionQuery) CreateQuestion (question domain.Question, db *sql.DB) (i
 }
 
 func (q *questionQuery)	GetQuestions (db *sql.DB) ([]domain.Question, error) {
-	fmt.Println("getquestions call")
 	query := `SELECT * FROM "question"`
-	fmt.Println("getquestions call 1")
 	rows, err := db.Query(query)
-	fmt.Println("getquestions call 2")
+
 	if err != nil {
-	fmt.Println("getquestions call error")
 		log.Fatal(err)
 		return nil, err
 	}
