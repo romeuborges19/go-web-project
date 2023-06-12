@@ -35,20 +35,32 @@ func NewController(userService service.UserService,	questionService service.Ques
 	}
 }
 
-func (c *Controller) RegisterPage(w http.ResponseWriter, r *http.Request) {
-	tmpl.ExecuteTemplate(w, "register.html", nil)
+func (c *Controller) RegisterForm(w http.ResponseWriter, r *http.Request) {
+	userInfo, logged := c.GetSessionData(r)
+
+	tmpl.ExecuteTemplate(w, "form_register.html", struct {
+		Logged bool
+		User domain.Person
+	} {
+		Logged: logged,
+		User: userInfo,
+	})
 }
 
-func (c *Controller) QuestionPage(w http.ResponseWriter, r *http.Request){
-	tmpl.ExecuteTemplate(w, "question_form.html", nil)
+func (c *Controller) QuestionForm(w http.ResponseWriter, r *http.Request){
+	userInfo, logged := c.GetSessionData(r)
+
+	tmpl.ExecuteTemplate(w, "form_question.html", struct {
+		Logged bool
+		User domain.Person
+	} {
+		Logged: logged,
+		User: userInfo,
+	})
 }
 
-func (c *Controller) Login(w http.ResponseWriter, r *http.Request){
-	tmpl.ExecuteTemplate(w, "login.html", nil)
-}
-
-func (c *Controller) TemplateTest(w http.ResponseWriter, r *http.Request){
-	tmpl.ExecuteTemplate(w, "processor.html", nil)
+func (c *Controller) LoginForm(w http.ResponseWriter, r *http.Request){
+	tmpl.ExecuteTemplate(w, "form_login.html", nil)
 }
 
 func (c *Controller) DeleteSession(w http.ResponseWriter, r *http.Request) {

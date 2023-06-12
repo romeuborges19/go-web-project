@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func (c *Controller)  CreateUser (w http.ResponseWriter, r *http.Request){
+func (c *Controller) CreateUser (w http.ResponseWriter, r *http.Request){
 	if r.Method != "POST" {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return

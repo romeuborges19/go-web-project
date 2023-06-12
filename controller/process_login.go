@@ -6,7 +6,7 @@ import (
 	"github.com/gorilla/sessions"
 )
 
-func (c *Controller) LoginProcess(w http.ResponseWriter, r *http.Request){
+func (c *Controller) Login(w http.ResponseWriter, r *http.Request){
 	if r.Method != "POST" {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
@@ -37,7 +37,6 @@ func (c *Controller) LoginProcess(w http.ResponseWriter, r *http.Request){
 	if username != "" {
 		session.Values["username"] = username
 	}
-	fmt.Println("session:", session)
 	err = sessions.Save(r, w)
 
 	if password == correctPassword {

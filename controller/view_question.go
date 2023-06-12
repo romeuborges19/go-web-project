@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"cserver/domain"
 	"fmt"
 	"log"
 	"net/http"
@@ -25,6 +26,15 @@ func (c *Controller) QuestionView(w http.ResponseWriter, r *http.Request){
 		log.Fatal(err)
 		return
 	}
+	userInfo, logged := c.GetSessionData(r)
 
-	tmpl.ExecuteTemplate(w, "question_page.html", questionInfo)
+	tmpl.ExecuteTemplate(w, "view_question.html", struct {
+		Logged bool
+		User domain.Person
+		Question domain.Question
+	} {
+		Logged: logged,
+		User: userInfo,
+		Question: questionInfo,
+	})
 }

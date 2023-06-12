@@ -1,0 +1,17 @@
+{{ template "headHTML" }}
+    <main>
+      {{ template "headerHTML" . }}
+      <div class="question-info-body-container">
+        <div class="question-info-container">
+          <div class="question-info-title-container">
+            <p class="question-info-title">{{.Question.Title}}</p>
+          </div>
+          <div class="question-info-description-container">
+            <p class="question-info-description">{{.Question.Description}}</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
+

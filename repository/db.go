@@ -29,9 +29,7 @@ func NewDB() (*sql.DB, error){
 	}
 
 	dbconn := fmt.Sprintf("host=%s port=%s dbname=%s sslmode=disable user=%s password=%s", host, port, dbname, user, password)
-	fmt.Println("newdb call 1")
 	DB, err := sql.Open("postgres", dbconn)
-	fmt.Println("newdb call 2")
 	if err != nil{
 		fmt.Println(err)
 		return nil, err

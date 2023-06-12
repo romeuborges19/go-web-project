@@ -200,10 +200,38 @@ a{
 	flex-direction: column;
 	gap: 15px;
 }
+
 .form-description-input{
 	width: 500px;
 	margin-top: 5px;
 	border: 1px solid #dcdfe0;
 	border-radius: 3px;
 	padding-inline: 4px;
+}
+
+.question-info-body-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.question-info-container{
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #dcdfe0;
+	border-radius: 3px;
+	width: 70%;
+	padding: 15px;
+	margin: 30px;
+	gap: 10px;
+}
+
+.question-info-title {
+	font-size: 30px;
+	font-weight:600;
+	font-style: Arial;
+}
+
+.question-info-description {
+	font-size: 16px;
 }
