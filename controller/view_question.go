@@ -2,7 +2,6 @@ package controller
 
 import (
 	"cserver/domain"
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -19,15 +18,11 @@ func (c *Controller) QuestionView(w http.ResponseWriter, r *http.Request){
 		log.Fatal(err)
 		return
 	}
-	fmt.Println("erro1")
 	questionInfo, err := c.questionService.GetQuestion(questionID, c.db)
-	fmt.Println("erro2")
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("erro3")
 	authorInfo, err := c.userService.GetUserByID(questionInfo.AuthorID, c.db)
-	fmt.Println("erro4")
 	if err != nil {
 		log.Fatal(err)
 	}

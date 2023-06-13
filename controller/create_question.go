@@ -28,10 +28,12 @@ func (c *Controller) CreateQuestion(w http.ResponseWriter, r *http.Request) {
 
 		username := fmt.Sprint(session.Values["username"])
 
+		var current_timestamp time.Time 
+		current_timestamp = time.Now()
 		question := domain.Question{
 			Title: r.PostFormValue("title"),
 			Description: r.PostFormValue("description"),
-			CreatedAt: time.Now(),
+			CreatedAt: &current_timestamp,
 		}
 
 		_, err = c.questionService.CreateQuestion(question, username, c.db)

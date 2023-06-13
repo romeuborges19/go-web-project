@@ -42,7 +42,7 @@ func (q *questionQuery)	GetQuestions (db *sql.DB) ([]domain.Question, error) {
 	var questions []domain.Question
 	var question domain.Question
 	for rows.Next() {
-		err := rows.Scan(&question.ID, &question.Title, &question.Description, &question.AuthorID, &question.CreatedAt)
+		err := rows.Scan(&question.ID, &question.Title, &question.Description, &question.AuthorID, &question.CreatedAt, &question.ModifiedAt)
 		if err != nil {
 			log.Fatal(err)
 			return nil, err
@@ -63,9 +63,9 @@ func (q *questionQuery) GetQuestionByID(questionID int, db *sql.DB) (domain.Ques
 
 	var id, authorID int
 	var title, description string
-	var createdAt time.Time
+	var createdAt, modifiedAt *time.Time
 
-	err := db.QueryRow(query, questionID).Scan(&id, &title, &description, &authorID, &createdAt)
+	err := db.QueryRow(query, questionID).Scan(&id, &title, &description, &authorID, &createdAt, &modifiedAt)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return domain.Question{}, errors.New("user not found")
@@ -78,6 +78,7 @@ func (q *questionQuery) GetQuestionByID(questionID int, db *sql.DB) (domain.Ques
 		Title: title,
 		Description: description,
 		CreatedAt: createdAt,
+		ModifiedAt: modifiedAt,
 		AuthorID: authorID,
 	}
 	return questionInfo, nil

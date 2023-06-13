@@ -6,6 +6,7 @@ type Question struct {
 	ID 			int
 	Title 		string
 	Description string
-	CreatedAt 	time.Time
+	CreatedAt 	*time.Time
+	ModifiedAt 	*time.Time
 	AuthorID	int
 }
