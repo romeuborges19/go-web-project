@@ -20,15 +20,17 @@ func main() {
 	defer db.Close()
 	mux := mux.NewRouter()
 
+	// Initializing all services
 	dao := repository.NewDAO()
 	userService := service.NewUserService(dao)
 	questionService := service.NewQuestionService(dao)
 	c := controller.NewController(userService, questionService, db)
 
+	// Parsing static files to the server
 	fs := http.FileServer(http.Dir("web/static"))
 	mux.PathPrefix("/web/static/").Handler(http.StripPrefix("/web/static", fs))
 
-	// mux.Handle("/web/static/", http.StripPrefix("/web/static/", fs))
+	// Handling the website routes
 	mux.Handle("/author/web/static/", http.StripPrefix("/author/web/static/", fs))
 	mux.HandleFunc("/", c.Handler)
 	mux.HandleFunc("/author/register", c.RegisterForm)

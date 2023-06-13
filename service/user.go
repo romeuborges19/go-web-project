@@ -12,6 +12,7 @@ type UserService interface{
 	CreateUser (person domain.Person, db *sql.DB) (int64, error)
 	GetPasswordByUsername (username string, db *sql.DB) (string, error)
 	GetUserByUsername (username string, db *sql.DB) (domain.Person, error)
+	GetUserByID (userID int, db *sql.DB) (domain.Person, error)
 }
 
 type userService struct{
@@ -46,6 +47,16 @@ func (u *userService) GetUserByUsername (username string, db *sql.DB) (domain.Pe
 		log.Fatal(err)
 		return domain.Person{}, err
 	}
+	userInfo, err := u.dao.NewUserQuery().GetUserByID(userID, db)
+	if err != nil {
+		log.Fatal(err)
+		return domain.Person{}, err
+	}
+
+	return userInfo, nil
+}
+
+func (u *userService) GetUserByID (userID int, db *sql.DB) (domain.Person, error) {
 	userInfo, err := u.dao.NewUserQuery().GetUserByID(userID, db)
 	if err != nil {
 		log.Fatal(err)

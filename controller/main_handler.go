@@ -17,8 +17,8 @@ func (c *Controller) Handler(w http.ResponseWriter, r *http.Request) {
 	userInfo, logged := c.GetSessionData(r)
 
 	tmpl.ExecuteTemplate(w, "index.html", struct {
-		Logged bool
-		Questions []domain.Question
+			Logged bool
+			Questions []domain.Question
 			User domain.Person
 		}{ 	
 			Logged: logged,

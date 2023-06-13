@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 	// "github.com/gorilla/sessions"
 )
 
@@ -30,6 +31,7 @@ func (c *Controller) CreateQuestion(w http.ResponseWriter, r *http.Request) {
 		question := domain.Question{
 			Title: r.PostFormValue("title"),
 			Description: r.PostFormValue("description"),
+			CreatedAt: time.Now(),
 		}
 
 		_, err = c.questionService.CreateQuestion(question, username, c.db)

@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"log"
+	"time"
 )
 
 type QuestionQuery interface {
@@ -16,9 +17,9 @@ type QuestionQuery interface {
 type questionQuery struct {}
 
 func (q *questionQuery) CreateQuestion (question domain.Question, db *sql.DB) (int, error){
-	query := `INSERT INTO "question"("title", "description", "id_autor") VALUES ($1, $2, $3)`
+	query := `INSERT INTO "question"("title", "description", "id_autor", "created_at") VALUES ($1, $2, $3, $4)`
 
-	_, err := db.Exec(query, question.Title, question.Description, question.AuthorID)
+	_, err := db.Exec(query, question.Title, question.Description, question.AuthorID, question.CreatedAt)
 	if err != nil {
 		log.Fatal(err)
 		return 0, err
@@ -41,7 +42,7 @@ func (q *questionQuery)	GetQuestions (db *sql.DB) ([]domain.Question, error) {
 	var questions []domain.Question
 	var question domain.Question
 	for rows.Next() {
-		err := rows.Scan(&question.ID, &question.Title, &question.Description, &question.AuthorID)
+		err := rows.Scan(&question.ID, &question.Title, &question.Description, &question.AuthorID, &question.CreatedAt)
 		if err != nil {
 			log.Fatal(err)
 			return nil, err
@@ -62,8 +63,9 @@ func (q *questionQuery) GetQuestionByID(questionID int, db *sql.DB) (domain.Ques
 
 	var id, authorID int
 	var title, description string
+	var createdAt time.Time
 
-	err := db.QueryRow(query, questionID).Scan(&id, &title, &description, &authorID)
+	err := db.QueryRow(query, questionID).Scan(&id, &title, &description, &authorID, &createdAt)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return domain.Question{}, errors.New("user not found")
@@ -75,6 +77,7 @@ func (q *questionQuery) GetQuestionByID(questionID int, db *sql.DB) (domain.Ques
 		ID: id,
 		Title: title,
 		Description: description,
+		CreatedAt: createdAt,
 		AuthorID: authorID,
 	}
 	return questionInfo, nil
