@@ -23,7 +23,6 @@ func (c *Controller) CreateQuestion(w http.ResponseWriter, r *http.Request) {
 
 		if err != nil {
 			log.Fatal(err)
-			return
 		}
 
 		username := fmt.Sprint(session.Values["username"])
@@ -37,5 +36,6 @@ func (c *Controller) CreateQuestion(w http.ResponseWriter, r *http.Request) {
 		}
 
 		_, err = c.questionService.CreateQuestion(question, username, c.db)
+		http.Redirect(w, r, "/", http.StatusSeeOther)	
 	}
 }

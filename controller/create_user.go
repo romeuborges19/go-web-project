@@ -21,7 +21,6 @@ func (c *Controller) CreateUser (w http.ResponseWriter, r *http.Request){
 	_, err := c.userService.CreateUser(userInfo, c.db)	
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 	http.Redirect(w, r, "/success", http.StatusSeeOther)
 	return

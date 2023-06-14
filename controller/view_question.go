@@ -16,7 +16,6 @@ func (c *Controller) QuestionView(w http.ResponseWriter, r *http.Request){
 	questionID, err := strconv.Atoi(ID)
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 	questionInfo, err := c.questionService.GetQuestion(questionID, c.db)
 	if err != nil {

@@ -1,8 +1,9 @@
 package controller
 
 import (
-	"fmt"
+	"log"
 	"net/http"
+
 	"github.com/gorilla/sessions"
 )
 
@@ -32,7 +33,7 @@ func (c *Controller) Login(w http.ResponseWriter, r *http.Request){
 	correctPassword, err := c.userService.GetPasswordByUsername(username, c.db) 
 	if err != nil {
 		http.Redirect(w, r, "/failure", http.StatusSeeOther)
-		fmt.Println(err)
+		log.Fatal(err)
 	}
 	if username != "" {
 		session.Values["username"] = username
