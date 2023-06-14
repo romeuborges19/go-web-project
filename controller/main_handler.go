@@ -11,7 +11,6 @@ func (c *Controller) Handler(w http.ResponseWriter, r *http.Request) {
 	questions, err := c.questionService.GetQuestions(c.db)
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 
 	userInfo, logged := c.GetSessionData(r)
