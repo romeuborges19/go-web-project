@@ -127,6 +127,24 @@ a{
 	color: blue;
 }
 
+.question-subinfo-container{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
+}
+
+.question-category-info-container{
+	padding: 2.5px 5px;
+	font-size: 12px;
+	background-color:#32db43;
+	border-radius: 3px;
+}
+
+.question-info-top {
+	margin-bottom: 10px;
+}
+
 .button {
 	border-radius: 3px;
 	padding: 10px 10px;

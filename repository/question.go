@@ -64,6 +64,15 @@ func (q *questionQuery)	GetQuestions (db *sql.DB) ([]domain.Question, error) {
 		if err != nil {
 			log.Fatal(err)
 		}
+
+		query = `SELECT "name" FROM "category" WHERE id = $1`
+		err = db.QueryRow(query, question.Category.ID).Scan(
+			&question.Category.Name,
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+
 		questions = append(questions, question)
 	}
 	

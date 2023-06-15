@@ -20,11 +20,18 @@
         <div class="questions-container">
           {{ range $i, $q := .Questions }}
           <div class="question-container">
-            <div class="question-title-container">
-              <a class="question-title" href="/question/{{ $q.ID }}">{{ $q.Title }}</a>
-            </div>
-            <div class="question-author-info-container">
-              <p>{{ $q.Author.FirstName }}</p>
+            <div class="question-info-top">
+              <div class="question-title-container">
+                <a class="question-title" href="/question/{{ $q.ID }}">{{ $q.Title }}</a>
+              </div>
+              <div class="question-subinfo-container">
+                <div class="question-author-info-container">
+                  <p class="question-author-name">{{ $q.Author.FirstName }} {{ $q.Author.LastName }}</p>
+                </div>
+                <div class="question-category-info-container">
+                  <p class="question-category-name">{{ $q.Category.Name }}</p>
+                </div>
+              </div>
             </div>
             <div class="question-description">
               <p>{{ $q.Description }}</p> 
