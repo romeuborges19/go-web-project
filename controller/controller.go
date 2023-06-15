@@ -20,16 +20,18 @@ func init() {
 }
 
 type Controller struct{
-	userService service.UserService
+	userService 	service.UserService
 	questionService service.QuestionService
+	categoryService service.CategoryService
 	db *sql.DB
 	fs http.Handler
 }
 
-func NewController(userService service.UserService,	questionService service.QuestionService, db *sql.DB) *Controller {
+func NewController(userService service.UserService,	questionService service.QuestionService, categoryService service.CategoryService, db *sql.DB) *Controller {
 	return &Controller{
 		userService: userService,
 		questionService: questionService,
+		categoryService: categoryService,
 		db: db,
 		fs: http.FileServer(http.Dir("web/static")),
 	}
@@ -49,13 +51,19 @@ func (c *Controller) RegisterForm(w http.ResponseWriter, r *http.Request) {
 
 func (c *Controller) QuestionForm(w http.ResponseWriter, r *http.Request){
 	userInfo, logged := c.GetSessionData(r)
+	categories, err := c.categoryService.GetCategories(c.db)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	tmpl.ExecuteTemplate(w, "form_question.html", struct {
 		Logged bool
 		User domain.Person
+		Categories []domain.Category
 	} {
 		Logged: logged,
 		User: userInfo,
+		Categories: categories,
 	})
 }
 
@@ -67,14 +75,12 @@ func (c *Controller) DeleteSession(w http.ResponseWriter, r *http.Request) {
 	session, err := store.Get(r, "session-name")
 	if err != nil {
 		log.Fatal("failed to get session", err)
-		return
 	}
 
 	session.Options.MaxAge = -1
 	err = session.Save(r, w)
 	if err != nil {
 		log.Fatal("failed to delete session", err)
-		return 
 	}
 
 }

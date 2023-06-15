@@ -5,7 +5,6 @@ import (
 	"database/sql"
 	"errors"
 	"log"
-	"time"
 )
 
 type QuestionQuery interface {
@@ -17,9 +16,9 @@ type QuestionQuery interface {
 type questionQuery struct {}
 
 func (q *questionQuery) CreateQuestion (question domain.Question, db *sql.DB) (int, error){
-	query := `INSERT INTO "question"("title", "description", "id_autor", "created_at") VALUES ($1, $2, $3, $4)`
+	query := `INSERT INTO "question"("title", "description", "author_id", "category_id") VALUES ($1, $2, $3, $4)`
 
-	_, err := db.Exec(query, question.Title, question.Description, question.AuthorID, question.CreatedAt)
+	_, err := db.Exec(query, question.Title, question.Description, question.Author.ID, question.Category.ID)
 	if err != nil {
 		log.Fatal(err)
 		return 0, err
@@ -34,25 +33,41 @@ func (q *questionQuery)	GetQuestions (db *sql.DB) ([]domain.Question, error) {
 
 	if err != nil {
 		log.Fatal(err)
-		return nil, err
 	}
 
 	defer rows.Close()
 
 	var questions []domain.Question
 	var question domain.Question
+
 	for rows.Next() {
-		err := rows.Scan(&question.ID, &question.Title, &question.Description, &question.AuthorID, &question.CreatedAt, &question.ModifiedAt)
+		err := rows.Scan(
+			&question.ID, 
+			&question.Title, 
+			&question.Description, 
+			&question.CreatedAt, 
+			&question.ModifiedAt, 
+			&question.Author.ID, 
+			&question.Category.ID)
+
 		if err != nil {
 			log.Fatal(err)
-			return nil, err
+		}
+
+		query = `SELECT "first_name", "last_name", "username" FROM "person" WHERE id = $1`
+		err = db.QueryRow(query, question.Author.ID).Scan(
+			&question.Author.FirstName,
+			&question.Author.LastName,
+			&question.Author.Username,
+		)
+		if err != nil {
+			log.Fatal(err)
 		}
 		questions = append(questions, question)
 	}
 	
 	if err = rows.Err(); err != nil {
 		log.Fatal(err)
-		return nil, err
 	}
 
 	return questions, nil
@@ -61,11 +76,17 @@ func (q *questionQuery)	GetQuestions (db *sql.DB) ([]domain.Question, error) {
 func (q *questionQuery) GetQuestionByID(questionID int, db *sql.DB) (domain.Question, error){
 	query := `SELECT * FROM "question" WHERE id = $1`
 
-	var id, authorID int
-	var title, description string
-	var createdAt, modifiedAt *time.Time
+	var question domain.Question
 
-	err := db.QueryRow(query, questionID).Scan(&id, &title, &description, &authorID, &createdAt, &modifiedAt)
+	err := db.QueryRow(query, questionID).Scan(
+			&question.ID, 
+			&question.Title, 
+			&question.Description, 
+			&question.CreatedAt, 
+			&question.ModifiedAt, 
+			&question.Author.ID, 
+			&question.Category.ID)
+
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return domain.Question{}, errors.New("user not found")
@@ -73,13 +94,5 @@ func (q *questionQuery) GetQuestionByID(questionID int, db *sql.DB) (domain.Ques
 		return domain.Question{}, err
 	}
 
-	questionInfo := domain.Question{
-		ID: id,
-		Title: title,
-		Description: description,
-		CreatedAt: createdAt,
-		ModifiedAt: modifiedAt,
-		AuthorID: authorID,
-	}
-	return questionInfo, nil
+	return question, nil
 }

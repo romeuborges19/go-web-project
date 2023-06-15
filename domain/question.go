@@ -8,6 +8,6 @@ type Question struct {
 	Description  string
 	CreatedAt 	 *time.Time
 	ModifiedAt 	 *time.Time
-	AuthorID     int
-	CategoryID   int
+	Author       Person
+	Category     Category
 }

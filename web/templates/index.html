@@ -23,6 +23,9 @@
             <div class="question-title-container">
               <a class="question-title" href="/question/{{ $q.ID }}">{{ $q.Title }}</a>
             </div>
+            <div class="question-author-info-container">
+              <p>{{ $q.Author.FirstName }}</p>
+            </div>
             <div class="question-description">
               <p>{{ $q.Description }}</p> 
             </div>

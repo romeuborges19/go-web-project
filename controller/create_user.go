@@ -13,6 +13,8 @@ func (c *Controller) CreateUser (w http.ResponseWriter, r *http.Request){
 	}
 
 	userInfo := domain.Person{
+		FirstName:  r.PostFormValue("firstname"),
+		LastName:   r.PostFormValue("lastname"),
 		Username: 	r.PostFormValue("username"),
 		Email: 		r.PostFormValue("email"),
 		Password: 	r.PostFormValue("password"),

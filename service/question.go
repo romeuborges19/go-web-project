@@ -24,7 +24,7 @@ func NewQuestionService(dao repository.DAO) QuestionService {
 func (q *questionService) CreateQuestion (question domain.Question, authorUsername string, db *sql.DB) (int, error) {
 
 	userID, err := q.dao.NewUserQuery().GetIDByUsername(authorUsername, db)
-	question.AuthorID = userID
+	question.Author.ID = userID
 	_, err = q.dao.NewQuestionQuery().CreateQuestion(question, db)
 
 	if err != nil {

@@ -17,13 +17,18 @@ type UserQuery interface {
 
 type userQuery struct {}
 
-func (u *userQuery) CreateUser (person domain.Person, db *sql.DB) (int64, error) {
-	query := `INSERT INTO "person"("username", "email", "password") VALUES ($1, $2, $3)`
+func (u *userQuery) CreateUser (user domain.Person, db *sql.DB) (int64, error) {
+	query := `INSERT INTO "person"("first_name", "last_name", "username", "email", "password") VALUES ($1, $2, $3, $4, $5)`
 
-	_, err := db.Exec(query, person.Username, person.Email, person.Password)
+	_, err := db.Exec(query, 
+	user.FirstName, 
+	user.LastName,
+	user.Username,
+	user.Email, 
+	user.Password)
+
 	if err != nil {
 		log.Fatal(err)
-		return 0, err
 	}
 	return 1, nil
 
@@ -32,22 +37,23 @@ func (u *userQuery) CreateUser (person domain.Person, db *sql.DB) (int64, error)
 func (u *userQuery) GetUserByID (userID int, db *sql.DB) (domain.Person, error){
 	query := `SELECT * FROM "person" WHERE "id" = $1`
 
-	var id int
-	var username, email, password string
 
-	err := db.QueryRow(query, userID).Scan(&id, &username, &password, &email)
+	var user domain.Person
+
+	err := db.QueryRow(query, userID).Scan(
+		&user.ID,
+		&user.FirstName,
+		&user.LastName,
+		&user.Username,
+		&user.Email,
+		&user.Password,
+		&user.CreatedAt)
 
 	if err == sql.ErrNoRows {
 		return domain.Person{}, errors.New("user not found")
 	}
 
-
-	return domain.Person{
-		ID: id,
-		Username: username,
-		Email: email,
-		Password: password,
-	}, nil
+	return user, nil
 }
 
 func (u *userQuery) GetPasswordByUsername (username string, db *sql.DB) (string, error) {

@@ -17,6 +17,13 @@
                     <label>Description:</label>
                     <textarea class="form-description-input" type="text" name="description" rows="7"></textarea>
                   </div>
+                  <div class="form-select-container">
+                    <select name="categories">
+                      {{ range $i, $c := .Categories }}              
+                      <option value="{{ $c.Name }}">{{ $c.Name }}</option>
+                      {{ end }}
+                    </select>
+                  </div>
                 </div>
                 <div class="form-submit-button-container">
                   <input class="form-submit-button" type="submit" value="Post Question">

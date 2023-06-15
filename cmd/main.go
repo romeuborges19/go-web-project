@@ -24,7 +24,8 @@ func main() {
 	dao := repository.NewDAO()
 	userService := service.NewUserService(dao)
 	questionService := service.NewQuestionService(dao)
-	c := controller.NewController(userService, questionService, db)
+	categoryService := service.NewCategoryQuery(dao)
+	c := controller.NewController(userService, questionService, categoryService, db)
 
 	// Parsing static files to the server
 	fs := http.FileServer(http.Dir("web/static"))

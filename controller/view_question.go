@@ -21,7 +21,7 @@ func (c *Controller) QuestionView(w http.ResponseWriter, r *http.Request){
 	if err != nil {
 		log.Fatal(err)
 	}
-	authorInfo, err := c.userService.GetUserByID(questionInfo.AuthorID, c.db)
+	authorInfo, err := c.userService.GetUserByID(questionInfo.Author.ID, c.db)
 	if err != nil {
 		log.Fatal(err)
 	}

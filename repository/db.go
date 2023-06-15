@@ -14,6 +14,7 @@ var DB *sql.DB
 type DAO interface{
 	NewUserQuery() UserQuery
 	NewQuestionQuery() QuestionQuery
+	NewCategoryQuery() CategoryQuery
 }
 
 type dao struct{}
@@ -43,4 +44,8 @@ func (d *dao) NewUserQuery() UserQuery {
 
 func (d *dao) NewQuestionQuery() QuestionQuery {
 	return &questionQuery{}
+}
+
+func (d *dao) NewCategoryQuery() CategoryQuery {
+	return &categoryQuery{}
 }
