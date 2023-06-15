@@ -29,9 +29,19 @@ func (c *Controller) CreateQuestion(w http.ResponseWriter, r *http.Request) {
 
 		var current_timestamp time.Time 
 		current_timestamp = time.Now()
+		categoryName := r.PostFormValue("categories")
+		
+		category, err := c.categoryService.GetCategoryByName(categoryName, c.db)
+
+		fmt.Println(category)
+		if err != nil {
+			log.Fatal(err)
+		}
+
 		question := domain.Question{
 			Title: r.PostFormValue("title"),
 			Description: r.PostFormValue("description"),
+			Category: category,
 			CreatedAt: &current_timestamp,
 		}
 

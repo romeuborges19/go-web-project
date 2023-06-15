@@ -8,6 +8,7 @@ import (
 
 type CategoryQuery interface{
 	GetCategories(db *sql.DB) ([]domain.Category, error)
+	GetCategoryByName (name string, db *sql.DB) (domain.Category, error)
 }
 
 type categoryQuery struct {}
@@ -42,4 +43,20 @@ func (c *categoryQuery) GetCategories(db *sql.DB) ([]domain.Category, error){
 	}
 
 	return categories, nil
+}
+
+func (c *categoryQuery) GetCategoryByName (name string, db *sql.DB) (domain.Category, error) {
+	query := `SELECT * FROM "category" WHERE "name" = $1`
+
+	var category domain.Category
+	err := db.QueryRow(query, name).Scan(
+		&category.ID, 
+		&category.Name, 
+		&category.CreatedAt)
+	
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return category, nil
 }

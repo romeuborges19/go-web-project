@@ -9,6 +9,7 @@ import (
 
 type CategoryService interface {
 	GetCategories(db *sql.DB) ([]domain.Category, error)
+	GetCategoryByName(name string, db *sql.DB) (domain.Category, error)
 }
 
 type categoryService struct {
@@ -27,4 +28,14 @@ func (c *categoryService) GetCategories(db *sql.DB) ([]domain.Category, error){
 	}
 
 	return categories, nil
+}
+
+func (c *categoryService) GetCategoryByName(name string, db *sql.DB) (domain.Category, error){
+	category, err := c.dao.NewCategoryQuery().GetCategoryByName(name, db)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return category, nil
 }

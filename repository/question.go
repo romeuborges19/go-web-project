@@ -45,10 +45,11 @@ func (q *questionQuery)	GetQuestions (db *sql.DB) ([]domain.Question, error) {
 			&question.ID, 
 			&question.Title, 
 			&question.Description, 
+			&question.Author.ID, 
+			&question.Category.ID,
 			&question.CreatedAt, 
 			&question.ModifiedAt, 
-			&question.Author.ID, 
-			&question.Category.ID)
+		)
 
 		if err != nil {
 			log.Fatal(err)
