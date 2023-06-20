@@ -43,4 +43,5 @@ func (c *Controller) Login(w http.ResponseWriter, r *http.Request){
 	if password == correctPassword {
 		http.Redirect(w, r, "/", http.StatusSeeOther)	
 	}
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }

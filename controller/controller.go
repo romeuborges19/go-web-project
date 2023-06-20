@@ -83,6 +83,7 @@ func (c *Controller) DeleteSession(w http.ResponseWriter, r *http.Request) {
 		log.Fatal("failed to delete session", err)
 	}
 
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
 func CheckLogin(r *http.Request) bool {

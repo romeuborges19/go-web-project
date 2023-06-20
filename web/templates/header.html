@@ -6,7 +6,23 @@
     </div>
     {{ if .Logged }}
         <div class="header-user-info-container">
-            <p class="header-username">{{ .User.Username }}</p>
+            <p class="header-username" onclick="toggleMenu()">{{ .User.Username }}</p>
+        </div>
+
+        <div class="sub-menu-container" id="subMenu">
+            <div class="sub-menu">
+                <div class="sub-menu-user-info">
+                    <p>{{ .User.FirstName }} {{ .User.LastName }}</p>
+                </div>
+                <a href="#" class="sub-menu-link">
+                    <p>Acess Profile</p>
+                    <span>></span>
+                </a>   
+                <a href="/delete-session" class="sub-menu-link">
+                    <p>Logout</p>
+                    <span>></span>
+                </a>
+            </div> 
         </div>
     {{ else }}
         <div class="header-buttons-container">

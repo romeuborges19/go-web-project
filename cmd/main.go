@@ -42,6 +42,7 @@ func main() {
 	mux.HandleFunc("/author/question", c.CreateQuestion)
 	mux.HandleFunc("/delete-session", c.DeleteSession)
 	mux.HandleFunc("/question/{id}", c.QuestionView)
+	mux.HandleFunc("/user/{id}", c.QuestionView)
 	
 	http.ListenAndServe(":8080", context.ClearHandler(mux))
 }

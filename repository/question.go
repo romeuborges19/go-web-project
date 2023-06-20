@@ -92,10 +92,11 @@ func (q *questionQuery) GetQuestionByID(questionID int, db *sql.DB) (domain.Ques
 			&question.ID, 
 			&question.Title, 
 			&question.Description, 
+			&question.Author.ID, 
+			&question.Category.ID,
 			&question.CreatedAt, 
 			&question.ModifiedAt, 
-			&question.Author.ID, 
-			&question.Category.ID)
+		)
 
 	if err != nil {
 		if err == sql.ErrNoRows {
