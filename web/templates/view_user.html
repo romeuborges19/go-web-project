@@ -1,0 +1,18 @@
+{{ template "headHTML" }}
+    <main>
+      {{ template "headerHTML" . }}
+      <div class="user-info-box-container">
+        <div class="user-info-box">
+          <div class="user-name-container">
+            <p class="user-name">
+              {{ .User.FirstName }} {{ .User.LastName }} 
+            </p>
+            <div class="user-username-container">
+              <p class="user-username"> {{ .User.Username }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -4,6 +4,7 @@ import (
 	"cserver/domain"
 	"database/sql"
 	"errors"
+	"fmt"
 
 	"log"
 )
@@ -35,6 +36,7 @@ func (u *userQuery) CreateUser (user domain.Person, db *sql.DB) (int64, error) {
 }
 
 func (u *userQuery) GetUserByID (userID int, db *sql.DB) (domain.Person, error){
+	fmt.Println("userID being search: ", userID)
 	query := `SELECT * FROM "person" WHERE "id" = $1`
 
 
