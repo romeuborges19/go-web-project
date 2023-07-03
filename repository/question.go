@@ -28,7 +28,7 @@ func (q *questionQuery) CreateQuestion (question domain.Question, db *sql.DB) (i
 }
 
 func (q *questionQuery)	GetQuestions (db *sql.DB) ([]domain.Question, error) {
-	query := `SELECT * FROM "question"`
+	query := `SELECT * FROM "question" ORDER BY "id" DESC`
 	rows, err := db.Query(query)
 
 	if err != nil {

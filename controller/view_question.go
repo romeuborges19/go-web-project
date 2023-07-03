@@ -27,6 +27,7 @@ func (c *Controller) QuestionView(w http.ResponseWriter, r *http.Request){
 	}
 
 	userInfo, logged := c.GetSessionData(r)
+	userInfo, err = c.userService.GetUserByUsername(userInfo.Username, c.db)
 
 	tmpl.ExecuteTemplate(w, "view_question.html", struct {
 		Logged 	 bool

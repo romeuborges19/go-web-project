@@ -14,14 +14,16 @@
                 <div class="sub-menu-user-info">
                     <p>{{ .User.FirstName }} {{ .User.LastName }}</p>
                 </div>
-                <a href="/user/{{ .User.ID }}" class="sub-menu-link">
-                    <p>Acess Profile</p>
-                    <span>></span>
-                </a>   
-                <a href="/delete-session" class="sub-menu-link">
-                    <p>Logout</p>
-                    <span>></span>
-                </a>
+                <div class="sub-menu-options">
+                    <a href="/user/{{ .User.ID }}" class="sub-menu-link">
+                        <p>Acess Profile</p>
+                        <span>></span>
+                    </a>   
+                    <a href="/delete-session" class="sub-menu-link">
+                        <p>Logout</p>
+                        <span>></span>
+                    </a>
+                </div>
             </div> 
         </div>
     {{ else }}
